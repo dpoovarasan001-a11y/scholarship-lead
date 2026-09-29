@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ScholarVerify – Verified Scholarship Discovery & Application Platform</title>
+<style>
+:root{--ink:#0b1c30;--mut:#3d4a42;--g:#006948;--b:#0051d5;--bg:#f8f9ff;--s1:#eff4ff;--s2:#e5eeff;--bd:#d3e4fe;--r:#ba1a1a;--am:#b45309;--or:#c2410c;--bl:#316bf3;--sh:0 1px 1px rgba(0,0,0,.05);--sh2:0 4px 6px -1px rgba(0,0,0,.1),0 2px 4px -2px rgba(0,0,0,.1)}
+*{box-sizing:border-box;margin:0}html{scroll-behavior:smooth;scroll-padding-top:90px}
+body{font-family:"Liberation Serif",Georgia,"Times New Roman",serif;background:var(--bg);color:var(--ink);line-height:1.5}
+a{color:inherit;text-decoration:none}
+.w{max-width:1280px;margin:auto;padding:0 24px}
+section{padding:40px 0}
+.eb{font-size:12px;font-weight:700;letter-spacing:.14em;color:var(--b);text-transform:uppercase}
+h1{font-size:clamp(36px,5.2vw,64px);line-height:1;letter-spacing:-.02em;font-weight:700}
+h2{font-size:clamp(26px,3.4vw,36px);line-height:1.1;letter-spacing:-.01em;font-weight:700;margin:4px 0 10px}
+h3{font-size:20px}p.lead{color:var(--mut);font-size:17px;max-width:768px}
+.c{text-align:center}.c p.lead{margin:auto}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:8px 24px;border-radius:6px;font:700 15px inherit;font-family:inherit;border:1px solid var(--b);background:var(--b);color:#fff;cursor:pointer}
+.btn.o{background:#fff;color:var(--b)}.btn.full{width:100%}.btn.sm{min-height:32px;padding:4px 10px;font-size:12px}
+.btn:disabled{opacity:.6;cursor:not-allowed}
+.card{background:#fff;border:1px solid var(--bd);border-radius:8px;box-shadow:var(--sh2)}
+.badge{display:inline-flex;align-items:center;gap:6px;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:700;background:var(--s2);color:var(--b)}
+.dot{width:8px;height:8px;border-radius:50%;background:currentColor;display:inline-block}
+.ok{color:var(--g);background:rgba(0,105,72,.1)}.wr{color:var(--am);background:#fef3c7}.er{color:var(--r);background:#ffdad6}.in{color:var(--b);background:rgba(0,81,213,.1)}.ro{color:var(--or);background:#ffedd5}
+/* header */
+header{position:sticky;top:0;z-index:20;background:rgba(248,249,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--bd)}
+.hd{display:flex;align-items:center;justify-content:space-between;gap:16px;height:80px}
+.logo{display:flex;align-items:center;gap:8px;font-weight:700;font-size:20px;letter-spacing:.02em}
+.logo i{width:32px;height:32px;border-radius:8px;background:var(--b);color:#fff;display:grid;place-items:center;font-style:normal}
+nav{display:flex;gap:24px;font-size:15px;color:var(--mut)}nav a:hover{color:var(--b)}
+.hr{display:flex;gap:12px;align-items:center}
+.menu{display:none;width:44px;height:44px;border:1px solid var(--bd);border-radius:8px;background:#fff;font-size:20px;cursor:pointer}
+/* hero */
+.hero{background:linear-gradient(var(--s1) 1px,transparent 1px),linear-gradient(90deg,var(--s1) 1px,transparent 1px);background-size:32px 32px}
+.hg{display:grid;grid-template-columns:1.43fr 1fr;gap:32px;align-items:center}
+.hero h1 span{color:var(--b)}.hero .sub{font-size:13px;font-weight:700;letter-spacing:.06em;color:var(--mut);margin:16px 0}
+.ctas{display:flex;flex-wrap:wrap;gap:16px;margin:16px 0 24px}
+.trust{display:flex;flex-wrap:wrap;gap:8px 20px;align-items:center;font-size:12px;font-weight:700;letter-spacing:.06em;color:var(--mut)}
+.vault{display:grid;gap:16px}.mock{padding:16px}
+.kv{display:grid;grid-template-columns:1fr 1fr;gap:8px;background:var(--s1);border-radius:6px;padding:8px;margin:12px 0;font-size:13px}
+.kv small{display:block;color:var(--mut);font-size:11px;letter-spacing:.06em}
+.reg{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:10px 8px;border-bottom:1px solid var(--s2)}
+.reg b{display:block;font-size:14px}.reg small{color:var(--mut)}
+/* filter */
+.filters{display:grid;grid-template-columns:repeat(4,1fr) auto;gap:8px;padding:16px;align-items:end;margin:24px 0}
+label.f{display:block;font-size:11px;font-weight:700;letter-spacing:.08em;color:var(--mut)}
+select{width:100%;min-height:40px;margin-top:4px;padding:8px;border:1px solid var(--bd);border-radius:6px;background:var(--s1);font:15px inherit;font-family:inherit;color:var(--ink)}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.sc{padding:16px;display:flex;flex-direction:column;gap:8px}.sc .top{display:flex;justify-content:space-between;font-size:12px;color:var(--r);font-weight:700}
+.sc .org{color:var(--mut);font-size:14px}.tags{display:flex;flex-wrap:wrap;gap:6px}.tags span{background:var(--s1);border-radius:4px;padding:2px 8px;font-size:12px}
+.docs{background:var(--s1);border-radius:6px;padding:8px;font-size:13px;display:grid;gap:4px}.docs .ok{background:none}
+.feat{margin-top:24px;padding:24px}.feat ul{list-style:none;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:16px 16px;margin:16px 0;font-size:14px}
+.feat li::before{content:"◆ ";color:var(--g)}.feat .foot{border-top:1px solid var(--bd);padding-top:12px;font-size:12px;font-weight:700;letter-spacing:.06em;color:var(--mut)}
+/* steps */
+.steps{display:grid;grid-template-columns:repeat(7,1fr);gap:8px;margin:32px 0 16px;counter-reset:s}
+.st{padding:12px;background:#fff;border:1px solid var(--bd);border-radius:8px;position:relative}
+.st b.n{font-size:22px;color:var(--b);display:block}.st h4{font-size:14px;letter-spacing:.04em;margin:4px 0}.st p{font-size:13px;color:var(--mut)}
+.st:not(:last-child)::after{content:"→";position:absolute;right:-12px;top:50%;color:var(--b);z-index:2}
+.two{display:grid;grid-template-columns:1fr 1.43fr;gap:32px;align-items:center}
+.crit{padding:16px}.crit .badge{margin-bottom:8px}.crit p{font-size:14px;color:var(--mut)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+/* details */
+.dp{padding:24px}.dh{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;margin-bottom:16px}
+.pts{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.pt{background:var(--s1);border-radius:6px;padding:8px 12px}.pt small{display:block;font-size:11px;font-weight:700;letter-spacing:.08em;color:var(--b)}.pt span{font-size:14px}
+.ft{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-top:16px;font-size:12px;font-weight:700;color:var(--mut)}
+/* vault */
+.chips{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:24px 0}
+.chip{padding:8px 12px;display:flex;gap:10px;align-items:center;font-size:14px;font-weight:700}.chip small{display:block;font-weight:400;color:var(--mut)}
+.drop{border:2px dashed var(--bl);background:var(--s1);border-radius:8px;padding:24px;text-align:center;margin-top:8px}
+.drop.drag{background:var(--s2)}.drop h4{font-size:18px;margin:8px 0}.drop p{color:var(--mut);font-size:14px;margin-bottom:12px}
+/* status */
+.sg{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px}
+.sd{padding:16px;display:flex;flex-direction:column;gap:8px;border-top:4px solid var(--bl)}
+.sd .r{display:flex;justify-content:space-between;font-size:14px}.sd .r span{color:var(--mut)}
+.sd .note{background:var(--s1);border-radius:6px;padding:8px;font-size:12px}
+.lg{background:var(--s1);border-radius:8px;padding:16px;font-size:14px}.lg li{list-style:none;display:flex;gap:8px;align-items:center;margin:6px 0}
+/* eligibility */
+.crow{display:grid;grid-template-columns:repeat(8,1fr);gap:8px;margin:24px 0}
+.cr{padding:8px;text-align:center;font-size:11px;font-weight:700;letter-spacing:.06em;color:var(--mut)}.cr b{display:block;font-size:14px;color:var(--ink);letter-spacing:0}
+.out{padding:0;overflow:hidden;display:flex;flex-direction:column}.out h4{padding:10px 16px;font-size:18px}.out>div{padding:16px;display:flex;flex-direction:column;gap:12px;flex:1}
+.out ul{list-style:none;padding:0;font-size:14px;display:grid;gap:4px;flex:1}
+/* checklist */
+.ck{padding:24px}.ckh{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.ci{display:flex;justify-content:space-between;gap:8px;padding:8px;border-radius:6px;font-size:14px;align-items:center}
+.ci:nth-child(odd){background:var(--s1)}.ci small{display:block;color:var(--mut)}
+.prog{height:8px;background:var(--s2);border-radius:99px;overflow:hidden;width:192px;margin-top:4px}.prog i{display:block;height:100%;width:80%;background:var(--g)}
+.ckf{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-top:16px}
+/* footer */
+footer{border-top:1px solid var(--bd);background:#fff;padding:32px 0}
+.fg{display:grid;grid-template-columns:repeat(5,1fr);gap:32px}.fg h5{font-size:13px;letter-spacing:.1em;margin-bottom:8px;color:var(--b)}.fg a{display:block;font-size:14px;color:var(--mut);padding:2px 0}
+.disc{font-size:13px;color:var(--mut);margin:24px 0 12px}.fb{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;font-size:12px;font-weight:700;color:var(--mut)}
+/* modal */
+.mo{position:fixed;inset:0;background:rgba(11,28,48,.55);display:none;place-items:center;z-index:50;padding:16px}.mo.on{display:grid}
+.md{width:100%;max-width:440px;padding:24px;background:#fff;border-radius:8px}
+.md input{width:100%;min-height:44px;margin:4px 0 12px;padding:8px 12px;border:1px solid var(--bd);border-radius:6px;background:var(--s1);font:16px inherit;font-family:inherit}
+.md input.bad{border-color:var(--r)}.err{color:var(--r);font-size:12px;margin:-8px 0 8px;min-height:0}.msg{margin-top:12px;font-weight:700}
+@media(max-width:1024px){nav{display:none}.menu{display:block}nav.open{display:flex;flex-direction:column;position:absolute;top:80px;left:0;right:0;background:#fff;padding:16px 24px;border-bottom:1px solid var(--bd)}
+.hg,.two{grid-template-columns:1fr}.steps{grid-template-columns:repeat(2,1fr)}.st::after{display:none}.grid3,.sg{grid-template-columns:repeat(2,1fr)}.filters{grid-template-columns:1fr 1fr}.feat ul{grid-template-columns:1fr 1fr}.chips{grid-template-columns:1fr 1fr}.crow{grid-template-columns:repeat(4,1fr)}.fg{grid-template-columns:1fr 1fr 1fr}.pts{grid-template-columns:1fr 1fr}}
+@media(max-width:640px){.hr .btn.o{display:none}.grid3,.sg,.grid2,.pts,.chips,.steps,.filters,.feat ul{grid-template-columns:1fr}.crow{grid-template-columns:1fr 1fr}.fg{grid-template-columns:1fr 1fr}.ctas .btn{width:100%}.kv{grid-template-columns:1fr}.ckf .btn{width:100%}.prog{width:100%}}
+</style></head><body>
+<header><div class="w hd">
+<a class="logo" href="#top"><i>✓</i>SCHOLARVERIFY</a>
+<nav id="nav"><a href="#discover">Find Scholarships</a><a href="#how">How It Works</a><a href="#verify">Document Verification</a><a href="#eligibility">Eligibility Check</a><a href="#tracking">Application Tracking</a><a href="#footer">For Institutions/Reviewers</a></nav>
+<div class="hr"><a class="btn o sm" href="#status" style="min-height:44px;font-size:14px">Check Document Status</a><button class="btn" data-lead>START APPLICATION</button><button class="menu" id="mb" aria-label="Menu">☰</button></div>
+</div></header>
+<main id="top">
+<section class="hero"><div class="w hg">
+<div>
+<span class="badge ok"><i class="dot"></i>SECURE, ISSUER-BASED DOCUMENT VERIFICATION</span>
+<h1 style="margin-top:16px">FIND THE RIGHT SCHOLARSHIP. <span>VERIFY.</span> <span style="color:var(--ink)">DISCOVER. VERIFY. APPLY. TRACK.</span></h1>
+<p class="lead" style="margin-top:16px">Finding a scholarship is only the first step. Our platform helps you discover suitable opportunities, verify your required documents, check your eligibility, and manage your application in one secure place.</p>
+<p class="sub">FROM SCHOLARSHIP DISCOVERY TO DOCUMENT VERIFICATION — EVERY IMPORTANT STEP, CLEARLY HANDLED.</p>
+<div class="ctas"><a class="btn" href="#discover">Find My Scholarship →</a><button class="btn o" data-lead>▣ Start an Application</button></div>
+<div class="trust"><span>TRUST INFRASTRUCTURE</span><span>🔒 256-bit AES Vault</span><span>✔ Official Issuing API</span><span>🛡 Zero-Forged-Credential Policy</span></div>
+</div>
+<div class="vault">
+<div class="card mock"><div style="display:flex;justify-content:space-between;gap:8px"><div><small class="eb" style="color:var(--mut)">NATIONAL GRANT MATRIX</small><h3>National STEM Excellence Fellowship</h3></div><span class="badge">$12,500/yr</span></div>
+<div class="kv"><div><small>Application Closes</small>⏱ 14 Days Remaining</div><div><small>Verification Tier</small>🛡 Direct Registrar Depository</div></div>
+<div style="display:flex;justify-content:space-between;font-size:12px;font-weight:700"><span style="color:var(--g)"><i class="dot"></i> Criteria Match: 98.4%</span><span style="color:var(--b)">PREVIEW SPEC ›</span></div></div>
+<div class="card"><div style="display:flex;justify-content:space-between;padding:8px 16px;background:var(--s2);font-size:12px;font-weight:700"><span>LIVE VERIFICATION NODE</span><span>LEDGER-TX#99201</span></div><div style="padding:8px 16px">
+<div class="reg"><div><b>Income Certificate</b><small>Auth: State Treasury Registry</small></div><span class="badge ok">VERIFIED ✓</span></div>
+<div class="reg"><div><b>Degree Marksheet (Cum. GPA)</b><small>Auth: National Academic Depository</small></div><span class="badge ok">VERIFIED ✓</span></div>
+<div class="reg" style="border:0"><div><b>Community Certificate</b><small>Issuer check in progress</small></div><span class="badge wr">ACTION REQ ⚠</span></div></div></div>
+</div></div></section>
+
+<section id="discover"><div class="w">
+<span class="eb">Catalog & Multi-Attribute Search</span><h2>OPPORTUNITIES MADE EASIER TO FIND</h2>
+<p class="lead">Stop searching across multiple websites and trying to figure out which scholarships actually fit you. Discover opportunities based on your education, eligibility, category, location, and other relevant requirements.</p>
+<form class="card filters" id="ff" onsubmit="return false">
+<label class="f">EDUCATION LEVEL<select id="fe"><option value="">Undergraduate (B.S. / B.Tech / B.A.)</option><option>Postgraduate</option></select></label>
+<label class="f">COURSE / MAJOR TRACK<select id="fc"><option value="">All Engineering & Tech</option><option>Computer Science</option><option>STEM</option></select></label>
+<label class="f">GRANT CATEGORY<select><option>Merit-Cum-Means</option><option>Diversity</option></select></label>
+<label class="f">DISBURSEMENT RANGE<select><option>Any Amount</option></select></label>
+<button class="btn" id="af">⌄ Apply Filters</button></form>
+<div class="grid3" id="cards"></div>
+<div class="card feat"><span class="eb" style="color:var(--ink);font-size:14px">CORE SYSTEM CAPABILITIES</span>
+<ul><li><b>Education Matching:</b> credits and GPA criteria.</li><li><b>Eligibility Checks Beforehand:</b> criteria before student spends time applying.</li><li><b>Multi-Attribute Filter System:</b> state, minority, merit, and financial tier.</li><li><b>Amount & Deadline Precision:</b> disbursement timeline and urgency indicators.</li><li><b>Upfront Required Documents:</b> visibility of certificates needed per award.</li><li><b>Process Clarity:</b> from validation to monetary disbursement.</li><li><b>Centralized Management:</b> applications inside one unified ledger.</li><li><a class="btn o sm" href="#discover" style="min-height:36px;font-size:14px">Explore Scholarships →</a></li></ul>
+<div class="foot">STANDARD OPERATING PROCEDURE</div></div>
+</div></section>
+
+<section id="how"><div class="w c"><span class="eb">Standard Operating Procedure</span><h2>FIND. VERIFY. APPLY. TRACK.</h2>
+<div class="steps" style="text-align:left" id="steps"></div>
+<p style="font-weight:700">ONE PLATFORM. ONE CLEAR JOURNEY.</p></div></section>
+
+<section><div class="w two"><div>
+<span class="eb">Precision Mapping</span><h2>NOT EVERY SCHOLARSHIP IS FOR EVERYONE. FIND YOURS.</h2>
+<p class="lead">Your profile helps the platform identify scholarship opportunities that are relevant to your education and eligibility.</p>
+<p style="font-weight:700;margin:12px 0">The right scholarship starts with the right information.</p>
+<a class="btn" href="#eligibility">Find Scholarships For Me →</a></div>
+<div class="grid2" id="crit"></div></div></section>
+
+<section><div class="w"><div class="c"><span class="eb">Total Disclosure</span><h2>KNOW BEFORE YOU APPLY</h2><p class="lead">Complete clarity on every requirement, verification condition, and selection phase before you begin.</p></div>
+<div class="card dp" style="margin-top:24px"><div class="dh"><div><small class="eb" style="color:var(--mut)">DISBURSEMENT BLUEPRINT #SCH-9021</small><h3 style="font-size:26px">NATIONAL MERIT ENGINEERING ENDOWED GRANT</h3><p><b>Provider:</b> Registered Federal Academic Endowment</p></div><div style="text-align:right"><div style="font-size:24px;font-weight:700">$12,000 / Year (Renewable)</div><small style="color:var(--r);font-weight:700">⏱ Deadline: October 31, 2026 (23:59 EST)</small></div></div>
+<div class="pts" id="pts"></div>
+<div class="ft"><span>No guessing. No hidden requirements. Just the information you need.</span><span>SPEC-REV#2026.09.A</span></div></div></div></section>
+
+<section id="vault"><div class="w c"><span class="eb">Centralized Credential Vault</span><h2>UPLOAD ONCE. KEEP EVERYTHING ORGANIZED.</h2>
+<p class="lead">Make document submission simple by keeping every required document connected to the scholarship application.</p>
+<div class="chips" style="text-align:left" id="chips"></div>
+<div class="drop" id="drop"><div style="font-size:32px">⬆</div><h4>DRAG AND DROP ACADEMIC RECORDS TO VAULT</h4><p>Supports PDF, JPEG, PNG up to 15MB. Encrypted via 256-bit AES at rest. Files are queued for issuing-authority review; uploading does not mean a document is verified.</p><button class="btn" id="br">⬆ Browse Local Storage</button><input type="file" id="fi" hidden multiple accept=".pdf,.jpg,.jpeg,.png"><div id="fl" style="margin-top:12px;font-size:13px;color:var(--mut)"></div></div>
+<p style="margin-top:12px;color:var(--mut);font-size:14px">Know exactly which documents are complete and which ones still need attention.</p></div></section>
+
+<section id="verify"><div class="w"><span class="eb">The Verification Standard</span><h2>BEFORE YOU APPLY, VERIFY WHAT MATTERS.</h2>
+<p class="lead">A scholarship platform should not rely only on uploaded files. Where verification is supported, documents should be checked against appropriate official or authorized verification sources before they are treated as verified.</p>
+<div class="steps" style="grid-template-columns:repeat(5,1fr)" id="vs"></div>
+<div class="card crit" style="display:flex;gap:16px;align-items:flex-start"><span style="font-size:28px">⚠</span><div><b style="letter-spacing:.06em">INSTITUTIONAL VERIFICATION RULE #SEC-77</b><p>Do not treat a QR code alone as proof that a document is authentic. A QR code should only be considered part of verification when it can be validated through the appropriate issuing authority or authorized verification mechanism.</p></div></div>
+<p class="c" style="margin-top:16px;font-weight:700;font-size:13px;letter-spacing:.06em">UPLOAD A DOCUMENT. VERIFY THE SOURCE. KNOW THE STATUS.</p></div></section>
+
+<section id="status"><div class="w"><span class="eb">Audit Ledger States</span><h2>LIVE DOCUMENT STATUS MATRIX</h2>
+<p class="lead">Every document submitted undergoes unambiguous classification. Below are active system status states.</p>
+<div class="sg" id="sg"></div></div></section>
+
+<section id="eligibility"><div class="w"><div class="c"><span class="eb">Sequenced Validation</span><h2>ELIGIBILITY COMES AFTER VERIFICATION</h2><p class="lead">Eligibility is checked against verified information, so results reflect documents that have actually been reviewed.</p></div>
+<div class="crow" id="crow"></div><div class="grid3" id="out"></div>
+<p class="c" style="margin-top:16px;font-weight:700;font-size:13px">Clear requirements. Clear checks. Clear next steps.</p></div></section>
+
+<section id="tracking"><div class="w two"><div>
+<span class="eb">Pre-Flight Audit</span><h2>IS YOUR APPLICATION READY?</h2>
+<p class="lead">Before submission, our simple checklist helps students identify missing information, unverified documents, or incomplete requirements.</p>
+<p style="font-weight:700;margin:12px 0">FIX WHAT'S MISSING BEFORE YOU HIT SUBMIT.</p>
+<div class="card" style="padding:12px"><b style="color:var(--b);font-size:13px">💡 PRO-TIP FOR APPLICANTS</b><p style="font-size:14px;color:var(--mut)">Applications with 100% verified documents are processed 4.2x faster by committee registrars than unverified submissions.</p></div></div>
+<div class="card ck"><div class="ckh"><h3>APPLICATION READINESS DOSSIER</h3><span class="badge wr" id="pc">ACTION REQUIRED: 1 ITEM PENDING</span></div>
+<div id="cl"></div>
+<div class="ckf"><div><small style="font-weight:700;font-size:11px;letter-spacing:.06em">OVERALL PROGRESS</small><div class="prog"><i id="pg"></i></div></div><button class="btn" id="sb" disabled>SUBMIT APPLICATION LOCKED (1 PENDING)</button></div></div></div></section>
+</main>
+
+<footer id="footer"><div class="w"><div class="fg">
+<div><div class="logo"><i>✓</i>SCHOLARVERIFY</div><p style="font-size:14px;color:var(--mut);margin:8px 0">Making scholarship opportunities easier to find, verify, understand, and apply for.</p><span class="badge ok"><i class="dot"></i>AUDIT-GRADE PLATFORM</span></div>
+<div><h5>QUICK LINKS</h5><a href="#discover">Search Database</a><a href="#how">Platform Methodology</a><a href="#eligibility">Interactive Matcher</a><a href="#discover">Deadlines Calendar</a></div>
+<div><h5>STUDENT PORTAL</h5><a href="#" data-lead>Start New Application</a><a href="#status">Check Document Status</a><a href="#vault">Portfolio Dossier</a><a href="#" data-lead>Applicant Login</a></div>
+<div><h5>VERIFICATION & COMPLIANCE</h5><a href="#verify">Transcript Validation</a><a href="#verify">Financial Need Audits</a><a href="#verify">Registrar Connect</a><a href="#verify">Cryptographic Ledger</a></div>
+<div><h5>LEGAL & GOVERNANCE</h5><a href="#footer">Terms of Service</a><a href="#footer">Privacy & FERPA Policy</a><a href="#verify">Audit Standards</a><a href="#footer">Security Protocols</a></div></div>
+<p class="disc">Scholarship availability, eligibility, document requirements, verification methods, deadlines, and final selection decisions are determined by the respective scholarship providers and authorized verification sources.</p>
+<div class="fb"><span>System Status: Verified Normal</span><span>🔒 ISO 27001 / SOC2 Type II Verified</span></div></div></footer>
+
+<div class="mo" id="mo" role="dialog" aria-modal="true" aria-labelledby="mt"><div class="md card">
+<div style="display:flex;justify-content:space-between"><h3 id="mt">START APPLICATION</h3><button class="menu" style="display:block;width:36px;height:36px;font-size:16px" id="mx" aria-label="Close">✕</button></div>
+<p style="color:var(--mut);font-size:14px;margin:8px 0 16px">Leave your details and we'll be in touch.</p>
+<form id="lf" novalidate>
+<label class="f">NAME<input id="n" name="name" autocomplete="name"></label><div class="err" id="en"></div>
+<label class="f">EMAIL<input id="e" name="email" type="email" autocomplete="email"></label><div class="err" id="ee"></div>
+<label class="f">PHONE<input id="p" name="phone" type="tel" autocomplete="tel"></label><div class="err" id="ep"></div>
+<button class="btn full" id="ls" type="submit">START APPLICATION</button></form>
+<div class="msg" id="lm" role="status"></div></div></div>
+
+<script>
+const SCRIPT_URL="https://script.google.com/macros/s/AKfycbyMFsde5tQeTS7j8eLg47ljVaHYD3kdzI6kwlcfPdjTppnKDGk4Sf_SagM21XXvnYIoGw/exec";
+const $=s=>document.querySelector(s),H=(el,h)=>$(el).innerHTML=h;
+const SCH=[{t:"STATE AID #804",d:"12 Days Left",n:"State Tech Endowment Grant",o:"Department of Higher Technical Education",a:"₹2,50,000",u:" per term",tg:["Min 85% Marks","STEM Undergraduate"],c:4,lv:"Undergraduate",m:"STEM"},
+{t:"FOUNDATION #112",d:"5 Days Left",n:"Global Diversity Leadership Fund",o:"International Academic Consortium",a:"Direct Disbursement",u:"",tg:["Underrepresented Group","Postgraduate Only","Min 3.5 GPA"],c:5,lv:"Postgraduate",m:"STEM"},
+{t:"CORP ENDOWMENT #403",d:"30 Days Left",n:"Apex Women in Computing Award",o:"Apex Foundation for Informatics",a:"₹1,90,000",u:" Fixed",tg:["Female Applicants","Computer Science","All Semesters"],c:3,lv:"Undergraduate",m:"Computer Science"}];
+function cards(){const e=$("#fe").value,c=$("#fc").value;H("#cards",SCH.filter(s=>(!e||s.lv===e)&&(!c||s.m===c)).map(s=>`<article class="card sc"><div class="top"><span class="badge">${s.t}</span><span>⏱ ${s.d}</span></div><h3>${s.n}</h3><div class="org">${s.o}</div><div><b style="font-size:20px">${s.a}</b><span class="org">${s.u}</span></div><div class="tags">${s.tg.map(x=>`<span>${x}</span>`).join("")}</div><div class="docs"><div style="display:flex;justify-content:space-between"><span>Required Docs:</span><b>${s.c} Verified Assets</b></div><span class="ok">✔ Verification Tier: Official API Available</span></div><a class="btn full" href="#eligibility" style="margin-top:auto">View Scholarship →</a></article>`).join("")||'<p class="lead">No scholarships match these filters.</p>')}
+$("#af").onclick=cards;$("#fe").onchange=$("#fc").onchange=cards;cards();
+H("#steps",[["CREATE PROFILE","Establish student master record and residency credentials."],["DISCOVER","Algorithmically matches verified grade & economic criteria."],["UPLOAD DOCS","Submit encrypted certificates and academic transcripts."],["VERIFY SOURCE","Direct official depository & state authority confirmation."],["CHECK ELIGIBILITY","System audits documents against provider mandates."],["SUBMIT APPLICATION","Transmit audit-stamped dossier to selection committee."],["TRACK PIPELINE","Real-time status updates from initial review to disbursement."]].map((s,i)=>`<div class="st"><b class="n">0${i+1}</b><h4>${s[0]}</h4><p>${s[1]}</p></div>`).join(""));
+H("#crit",[["CRITERION 01","100% Match","Academic Performance","Matches cumulative GPA thresholds, percentile rankings, and specific course requirements directly from transcript data."],["CRITERION 02","Verified Geo","Category & Location","Filters by state domicile, district reservations, rural/urban classification, and category classifications."],["CRITERION 03","Audit-Ready","Family Income Brackets","Validates family income documentation against state or federal need-based thresholds without manual paperwork delays."],["CRITERION 04","Active Radar","Deadline Urgency Matching","Prioritizes scholarships closing within 15–30 days where your documents are already 100% verified."]].map(c=>`<div class="card" style="padding:16px"><div style="display:flex;justify-content:space-between"><small class="eb" style="color:var(--mut)">${c[0]}</small><span class="badge ok">${c[1]}</span></div><h3 style="margin:6px 0">${c[2]}</h3><p style="font-size:14px;color:var(--mut)">${c[3]}</p></div>`).join(""));
+H("#pts",[["01. GRANT PROVIDER","Registered Federal Academic Endowment, Direct Depository Settlement."],["02. TOTAL GRANT AMOUNT","$12,000 disbursed in two tranches ($6,000/semester) direct to registrar."],["03. MINIMUM ACADEMIC GPA","Cumulative GPA ≥ 3.65 on a 4.0 scale (or ≥ 82.5% state marks)."],["04. FAMILY INCOME LIMIT","Gross annual family income strictly below $65,000 (verified by IRS/Tax Auth)."],["05. REQUIRED DOCUMENTS","Identity proof, Official transcript, Income tax return, College Bonafide letter."],["06. VERIFICATION STANDARD","Transcript must validate via Clearinghouse API or direct digital signature."],["07. DOMICILE & RESIDENCY","Enrolled in an accredited domestic institution; US Citizen or Perm Resident."],["08. SELECTION PROCESS STEPS","1. Document verification → 2. Score ranking → 3. Trustee review panel."],["09. SPECIAL INSTRUCTIONS","No physical mail accepted. PDF submissions must have embedded fonts and OCR clarity."],["10. REVIEW TIMELINE","Evaluation runs Nov 1 – Nov 20, 2026; awards announced Nov 25, 2026."],["11. CURRENT APPLICATION STATUS","<span style='color:var(--g);font-weight:700'>● Applications Open (Auditing System Active)</span>"]].map(p=>`<div class="pt"><small>${p[0]}</small><span>${p[1]}</span></div>`).join("")+`<div class="pt" style="display:grid;place-items:center;background:none;padding:0"><a class="btn full" href="#status">VERIFY CREDENTIALS FOR THIS GRANT</a></div>`);
+H("#chips",[["IDENTITY PROOF","","ok"],["ACADEMIC MARK SHEETS","","ok"],["INCOME CERTIFICATE","Awaiting Review","in"],["COMMUNITY CERTIFICATE","Not Uploaded","wr"],["BONAFIDE CERTIFICATE","","ok"],["COLLEGE STUDENT ID","","ok"],["BANK PASSBOOK / IFSC","Direct Verified","ok"],["SPECIAL DOCUMENTS","Optional Annexures","in"]].map(c=>`<div class="card chip"><span class="badge ${c[2]}" style="padding:4px 8px">▤</span><div>${c[0]}<small>${c[1]}</small></div></div>`).join(""));
+H("#vs",[["DOC UPLOAD","Secure transmission with SHA-256 fingerprinting generated at receipt."],["DOC ANALYSIS","Classifies type, metadata fields, font anomalies, and image compression integrity."],["SOURCE CHECK","Queries authorized issuing registry, digital signature ledger, or state API."],["INFO MATCHING","Strict correlation: Student Name, DOB, Unique ID, Institution, and Scores."],["RESULT NODE","Issue cryptographic stamp: Verified, Verification Required, or Discrepancy."]].map((s,i)=>`<div class="st"><small class="eb">STAGE 0${i+1}</small><h4 style="font-size:16px">${s[0]}</h4><p>${s[1]}</p></div>`).join(""));
+const ST=[["Income Certificate","ok","VERIFIED ✓",["Authority Source:","State Revenue API"],["Audit Timestamp:","28 Sep 2026 14:22"],["Audit Transaction:","TX-XXXX-8821"],"✔ Direct depository confirmation completed.",null,"var(--g)"],
+["Community Certificate","wr","⚠ VERIFICATION REQUIRED",["Issue:","Issuer Registry Offline"],["Submitted Date:","29 Sep 2026"],["Queue ID:","Q-88019-REV"],null,"PROVIDE ADDITIONAL INFO / UPLOAD","var(--am)"],
+["Degree Mark Sheet","er","VERIFICATION FAILED ✕",["Discrepancy:","Name Mismatch on Registry"],["Checked Against:","Univ Registrar DB"],["Status Code:","ERR-409-DIFF"],"Additional review is required; this is not a finding of misconduct.","RE-SUBMIT / REQUEST REVIEW","var(--r)"],
+["Bonafide Certificate","in","⏳ UNDER REVIEW",["Audit Node:","Institutional Reviewer"],["Estimated Time:","~2 Hours Remaining"],["Batch:","INST-BATCH-09"],"Autonomous OCR validation passed; awaiting registrar sign-off.",null,"var(--bl)"],
+["College Student ID","ro","🔄 RE-UPLOAD REQ.",["Reason:","Blurry / Edges Cropped"],["Legibility Score:","42% (Min 80% req)"],["Notice:","Barcode illegible"],null,"UPLOAD CLEAR SCAN / PHOTO","var(--or)"]];
+H("#sg",ST.map(s=>`<div class="card sd" style="border-top-color:${s[8]}"><div style="display:flex;justify-content:space-between;gap:8px;align-items:center"><h3>${s[0]}</h3><span class="badge ${s[1]}">${s[2]}</span></div>${s.slice(3,6).map(r=>`<div class="r"><span>${r[0]}</span><b>${r[1]}</b></div>`).join("")}${s[6]?`<div class="note">${s[6]}</div>`:""}${s[7]?`<button class="btn o full sm" data-pick>${s[7]}</button>`:""}</div>`).join("")+`<div class="lg"><h3 style="margin-bottom:6px">NEUTRAL STATUS LEGEND</h3><p>Status determinations are descriptive, objective, and neutral. No student is accused of malicious intent.</p><ul style="padding:0;margin-top:8px"><li><i class="dot" style="color:var(--g)"></i><b>Verified:</b> confirmed by source</li><li><i class="dot" style="color:var(--bl)"></i><b>Under Review:</b> in queue</li><li><i class="dot" style="color:var(--am)"></i><b>Verification Required:</b> more info needed</li><li><i class="dot" style="color:var(--r)"></i><b>Failed:</b> discrepancy found</li><li><i class="dot" style="color:var(--or)"></i><b>Re-upload:</b> unreadable file</li></ul></div>`);
+H("#crow",[["AGE LIMIT","< 25 Yrs"],["LEVEL","Undergrad"],["MAJOR TRACK","Comp Sci"],["MIN GPA","≥ 3.60"],["FAMILY INCOME","< $50,000"],["CATEGORY","Merit-Means"],["DOMICILE","State Res."],["AUDIT STACK","4/4 Valid"]].map(c=>`<div class="card cr">${c[0]}<b>${c[1]}</b></div>`).join(""));
+H("#out",[["ELIGIBLE","ok","You appear to meet all listed eligibility requirements based on your verified credentials.",["✔ GPA 3.82 exceeds 3.60 threshold","✔ Income documented under $50,000","✔ Institutional affiliation confirmed"],"PROCEED TO FINAL REVIEW","#tracking",""],["CONDITIONALLY ELIGIBLE","wr","1 or more requirements need further review or supporting documentation before final approval.",["✔ Academic GPA criteria satisfied","! Community certificate under re-audit","⏳ Committee clearance pending"],"REVIEW PENDING ITEMS","#status","o"],["NOT ELIGIBLE","er","Does not match one or more specific criteria established by the endowment trustee.",["● Family income exceeds max threshold","— Course program not covered by grant","ⓘ View alternative matching funds"],"EXPLORE OTHER MATCHES","#discover","o"]].map(o=>`<div class="card out"><h4 class="${o[1]}">${o[0]}</h4><div><p style="font-size:14px">${o[2]}</p><ul>${o[3].map(x=>`<li>${x}</li>`).join("")}</ul><a class="btn full ${o[6]}" href="${o[5]}">${o[4]}</a></div></div>`).join(""));
+const CL=[["Student Identity Profile Completed","100% OK",1],["Required Certificates Uploaded (4 of 4)","COMPLETE",1],["Family Income Certificate Verified","VERIFIED ✓",1],["Community Certificate Verified","PASSED",1],["Academic Transcript Verification Pending","Registry awaiting semester 4 course breakdown",0]];
+function cl(){const p=CL.filter(c=>!c[2]).length,d=CL.length-p;H("#cl",CL.map((c,i)=>`<div class="ci"><span>${c[2]?'<b class="ok" style="border-radius:50%;padding:0 5px">✓</b>':'○'} <b>${c[0]}</b>${c[2]?"":`<small>${c[1]}</small>`}</span>${c[2]?`<span class="badge ok">${i==3?"DIGI-SIGNED":c[1]}</span>`:`<button class="btn sm" data-res="${i}">RESOLVE NOW</button>`}</div>`).join(""));$("#pg").style.width=d/CL.length*100+"%";$("#pc").textContent=p?`ACTION REQUIRED: ${p} ITEM PENDING`:"READY TO SUBMIT";$("#pc").className="badge "+(p?"wr":"ok");const b=$("#sb");b.disabled=!!p;b.textContent=p?`SUBMIT APPLICATION LOCKED (${p} PENDING)`:"SUBMIT APPLICATION"}
+cl();document.addEventListener("click",e=>{const r=e.target.closest("[data-res]");if(r){location.hash="#vault";$("#br").focus()}if(e.target.closest("[data-pick]"))$("#fi").click();const l=e.target.closest("[data-lead]");if(l){e.preventDefault();openM()}});
+$("#sb").onclick=()=>alert("Application submitted for committee review. Track it in your dossier.");
+// upload UI: uploaded != verified
+function addFiles(fs){[...fs].forEach(f=>{const d=document.createElement("div");d.textContent=`${f.name} — Uploaded · Processing (not yet verified)`;$("#fl").appendChild(d)})}
+$("#br").onclick=()=>$("#fi").click();$("#fi").onchange=e=>addFiles(e.target.files);
+["dragover","dragenter"].forEach(v=>$("#drop").addEventListener(v,e=>{e.preventDefault();$("#drop").classList.add("drag")}));
+["dragleave","drop"].forEach(v=>$("#drop").addEventListener(v,e=>{e.preventDefault();$("#drop").classList.remove("drag");if(v=="drop")addFiles(e.dataTransfer.files)}));
+$("#mb").onclick=()=>$("#nav").classList.toggle("open");document.querySelectorAll("nav a").forEach(a=>a.onclick=()=>$("#nav").classList.remove("open"));
+// lead form
+const mo=$("#mo"),f=$("#lf");let busy=false;
+function openM(){mo.classList.add("on");$("#n").focus()}function closeM(){mo.classList.remove("on")}
+$("#mx").onclick=closeM;mo.onclick=e=>{if(e.target===mo)closeM()};document.addEventListener("keydown",e=>{if(e.key==="Escape")closeM()});
+function showSuccess(){busy=false;f.reset();$("#lm").style.color="var(--g)";$("#lm").textContent="You're all set! We'll be in touch soon.";$("#ls").disabled=false}
+function showError(){busy=false;$("#lm").style.color="var(--r)";$("#lm").textContent="Something went wrong. Please try again.";$("#ls").disabled=false}
+f.addEventListener("submit",ev=>{ev.preventDefault();if(busy)return;const name=$("#n").value.trim(),email=$("#e").value.trim(),phone=$("#p").value.trim();$("#lm").textContent="";
+const v=[[$("#n"),$("#en"),name.length>=2,"Please enter your name."],[$("#e"),$("#ee"),/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email),"Please enter a valid email."],[$("#p"),$("#ep"),/^\+?[0-9\s\-()]{7,16}$/.test(phone)&&phone.replace(/\D/g,"").length>=7,"Please enter a valid phone number."]];
+let ok=true;v.forEach(x=>{x[0].classList.toggle("bad",!x[2]);x[1].textContent=x[2]?"":x[3];if(!x[2])ok=false});if(!ok)return;
+busy=true;$("#ls").disabled=true;
+const url=SCRIPT_URL+"?"+new URLSearchParams({name,email,phone});
+fetch(url,{method:"GET",mode:"no-cors"}).then(()=>showSuccess()).catch(()=>showError())});
+</script></body></html>
